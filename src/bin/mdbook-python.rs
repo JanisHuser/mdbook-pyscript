@@ -170,8 +170,8 @@ fn add_additional_files(doc: &mut Document) -> bool {
     }
 
 
-    file = "load-py-modules.js";
-    additional_js = additional(doc, "js");
+    let file = "load-py-modules.js";
+    let additional_js = additional(doc, "js");
     if has_file(&additional_js, file) {
         log::debug!("'{}' already in 'additional-js'. Skipping", file)
     } else {
