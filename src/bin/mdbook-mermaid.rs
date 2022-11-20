@@ -11,15 +11,13 @@ use std::{
     process,
 };
 
-const MERMAID_JS: &[u8] = include_bytes!("assets/mermaid.min.js");
-const MERMAID_INIT_JS: &[u8] = include_bytes!("assets/mermaid-init.js");
+const PYSCRIPT_JS: &[u8] = include_bytes!("assets/pyscript.js");
 const MERMAID_FILES: &[(&str, &[u8])] = &[
-    ("mermaid.min.js", MERMAID_JS),
-    ("mermaid-init.js", MERMAID_INIT_JS),
+    ("pyscript.js", MERMAID_JS),
 ];
 
 pub fn make_app() -> Command<'static> {
-    Command::new("mdbook-mermaid")
+    Command::new("mdbook-python")
         .version(crate_version!())
         .about("mdbook preprocessor to add mermaid support")
         .subcommand(
@@ -156,26 +154,13 @@ fn add_additional_files(doc: &mut Document) -> bool {
     let mut changed = false;
     let mut printed = false;
 
-    let file = "mermaid.min.js";
+    let file = "pyscript.js";
     let additional_js = additional(doc, "js");
     if has_file(&additional_js, file) {
         log::debug!("'{}' already in 'additional-js'. Skipping", file)
     } else {
         printed = true;
         log::info!("Adding additional files to configuration");
-        log::debug!("Adding '{}' to 'additional-js'", file);
-        insert_additional(doc, "js", file);
-        changed = true;
-    }
-
-    let file = "mermaid-init.js";
-    let additional_js = additional(doc, "js");
-    if has_file(&additional_js, file) {
-        log::debug!("'{}' already in 'additional-js'. Skipping", file)
-    } else {
-        if !printed {
-            log::info!("Adding additional files to configuration");
-        }
         log::debug!("Adding '{}' to 'additional-js'", file);
         insert_additional(doc, "js", file);
         changed = true;
@@ -197,7 +182,7 @@ fn additional<'a>(doc: &'a mut Document, additional_type: &str) -> Option<&'a mu
 
 fn has_preprocessor(doc: &mut Document) -> bool {
     doc.get("preprocessor")
-        .and_then(|p| p.get("mermaid"))
+        .and_then(|p| p.get("python"))
         .map(|m| matches!(m, Item::Table(_)))
         .unwrap_or(false)
 }
@@ -211,9 +196,9 @@ fn add_preprocessor(doc: &mut Document) {
     let item = item
         .as_table_mut()
         .unwrap()
-        .entry("mermaid")
+        .entry("python")
         .or_insert(empty_table);
-    item["command"] = value("mdbook-mermaid");
+    item["command"] = value("mdbook-python");
 }
 
 fn has_file(elem: &Option<&mut Array>, file: &str) -> bool {
