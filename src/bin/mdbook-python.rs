@@ -1,8 +1,9 @@
 use clap::{crate_version, Arg, ArgMatches, Command};
 use mdbook::errors::Error;
 use mdbook::preprocess::{CmdPreprocessor, Preprocessor};
-use mdbook_mermaid::Mermaid;
+use mdbook_python::Python;
 use toml_edit::{value, Array, Document, Item, Table, Value};
+
 
 use std::{
     fs::{self, File},
@@ -13,7 +14,7 @@ use std::{
 
 const PYSCRIPT_JS: &[u8] = include_bytes!("assets/pyscript.js");
 const MERMAID_FILES: &[(&str, &[u8])] = &[
-    ("pyscript.js", MERMAID_JS),
+    ("pyscript.js", PYSCRIPT_JS),
 ];
 
 pub fn make_app() -> Command<'static> {
@@ -63,7 +64,7 @@ fn handle_preprocessing() -> Result<(), Error> {
         );
     }
 
-    let processed_book = Mermaid.run(&ctx, book)?;
+    let processed_book = Python.run(&ctx, book)?;
     serde_json::to_writer(io::stdout(), &processed_book)?;
 
     Ok(())
@@ -71,7 +72,7 @@ fn handle_preprocessing() -> Result<(), Error> {
 
 fn handle_supports(sub_args: &ArgMatches) -> ! {
     let renderer = sub_args.value_of("renderer").expect("Required argument");
-    let supported = Mermaid.supports_renderer(renderer);
+    let supported = Python.supports_renderer(renderer);
 
     // Signal whether the renderer is supported by exiting with 1 or 0.
     if supported {

@@ -480,7 +480,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mdbook-mermaid"
+name = "mdbook-python"
 version = "0.12.1"
 dependencies = [
  "assert_cmd",

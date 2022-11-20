@@ -3,9 +3,9 @@ use mdbook::errors::Result;
 use mdbook::preprocess::{Preprocessor, PreprocessorContext};
 use pulldown_cmark::{CodeBlockKind::*, Event, Options, Parser, Tag};
 
-pub struct Pyscript;
+pub struct Python;
 
-impl Preprocessor for Pyscript {
+impl Preprocessor for Python {
     fn name(&self) -> &str {
         "Python"
     }
@@ -18,7 +18,7 @@ impl Preprocessor for Pyscript {
             }
 
             if let BookItem::Chapter(ref mut chapter) = *item {
-                res = Some(Pyscript::add_pyscript(chapter).map(|md| {
+                res = Some(Python::add_python(chapter).map(|md| {
                     chapter.content = md;
                 }));
             }
@@ -46,7 +46,7 @@ fn escape_html(s: &str) -> String {
     output
 }
 
-fn add_pyscript(content: &str) -> Result<String> {
+fn add_python(content: &str) -> Result<String> {
     let mut mermaid_content = String::new();
     let mut in_mermaid_block = false;
 
@@ -104,8 +104,8 @@ fn add_pyscript(content: &str) -> Result<String> {
     Ok(content)
 }
 
-impl Mermaid {
-    fn add_mermaid(chapter: &mut Chapter) -> Result<String> {
-        add_mermaid(&chapter.content)
+impl Python {
+    fn add_python(chapter: &mut Chapter) -> Result<String> {
+        add_python(&chapter.content)
     }
 }
