@@ -16,7 +16,7 @@ const PYSCRIPT_JS: &[u8] = include_bytes!("assets/pyscript.js");
 const LOAD_PY_MODULES_JS: &[u8] = include_bytes!("assets/load-py-modules.js");
 const MERMAID_FILES: &[(&str, &[u8])] = &[
     ("pyscript.js", PYSCRIPT_JS),
-    ("load-py-modules.js", JS),
+    ("load-py-modules.js", LOAD_PY_MODULES_JS),
 ];
 
 pub fn make_app() -> Command<'static> {
