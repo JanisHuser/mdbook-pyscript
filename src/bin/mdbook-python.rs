@@ -13,8 +13,10 @@ use std::{
 };
 
 const PYSCRIPT_JS: &[u8] = include_bytes!("assets/pyscript.js");
+const LOAD_PY_MODULES_JS: &[u8] = include_bytes!("assets/load-py-modules.js");
 const MERMAID_FILES: &[(&str, &[u8])] = &[
     ("pyscript.js", PYSCRIPT_JS),
+    ("load-py-modules.js", JS),
 ];
 
 pub fn make_app() -> Command<'static> {
@@ -157,6 +159,19 @@ fn add_additional_files(doc: &mut Document) -> bool {
 
     let file = "pyscript.js";
     let additional_js = additional(doc, "js");
+    if has_file(&additional_js, file) {
+        log::debug!("'{}' already in 'additional-js'. Skipping", file)
+    } else {
+        printed = true;
+        log::info!("Adding additional files to configuration");
+        log::debug!("Adding '{}' to 'additional-js'", file);
+        insert_additional(doc, "js", file);
+        changed = true;
+    }
+
+
+    file = "load-py-modules.js";
+    additional_js = additional(doc, "js");
     if has_file(&additional_js, file) {
         log::debug!("'{}' already in 'additional-js'. Skipping", file)
     } else {
