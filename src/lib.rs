@@ -92,9 +92,7 @@ fn add_python(content: &str) -> Result<String> {
             in_mermaid_block = false;
 
             let python_content = &content[code_span.clone()];
-            println!("{}", python_content);
-            let python_content = escape_html(python_content);
-            let python_code = format!("<py-repl>{}</py-repl>", python_content);
+            let python_code = format!("<pre class\"python-content\"><py-repl>{}</py-repl></pre>", python_content);
             mermaid_blocks.push((span, python_code));
         }
     }

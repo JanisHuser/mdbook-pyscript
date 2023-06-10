@@ -1,6 +1,6 @@
 [package]
 name = "mdbook-python"
-version = "0.12.8"
+version = "0.12.9"
 authors = ["Janis Huser"]
 description = "mdbook preprocessor to add mermaid support"
 license = "MPL-2.0"
