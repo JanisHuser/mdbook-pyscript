@@ -73,7 +73,7 @@ fn handle_preprocessing() -> Result<(), Error> {
 }
 
 fn handle_supports(sub_args: &ArgMatches) -> ! {
-    let renderer = sub_args.value_of("renderer").expect("Required argument");
+    let renderer = sub_args.get_one::<String>("renderer").expect("Required argument");
     let supported = Python.supports_renderer(renderer);
 
     // Signal whether the renderer is supported by exiting with 1 or 0.
@@ -85,7 +85,7 @@ fn handle_supports(sub_args: &ArgMatches) -> ! {
 }
 
 fn handle_install(sub_args: &ArgMatches) -> ! {
-    let dir = sub_args.value_of("dir").expect("Required argument");
+    let dir = sub_args.get_one::<String>("dir").expect("Required argument");
     let proj_dir = PathBuf::from(dir);
     let config = proj_dir.join("book.toml");
 
