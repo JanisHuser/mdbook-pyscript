@@ -53,10 +53,10 @@ fn add_python(content: &str) -> Result<String> {
     let mut in_mermaid_block = false;
 
     let mut opts = Options::empty();
-    opts.insert(Options::ENABLE_TABLES);
-    opts.insert(Options::ENABLE_FOOTNOTES);
-    opts.insert(Options::ENABLE_STRIKETHROUGH);
-    opts.insert(Options::ENABLE_TASKLISTS);
+    // opts.insert(Options::ENABLE_TABLES);
+    // opts.insert(Options::ENABLE_FOOTNOTES);
+    // opts.insert(Options::ENABLE_STRIKETHROUGH);
+    // opts.insert(Options::ENABLE_TASKLISTS);
 
     let mut code_span = 0..0;
 
@@ -77,6 +77,8 @@ fn add_python(content: &str) -> Result<String> {
             continue;
         }
 
+        println!(e);
+
         // We're in the code block. The text is what we want.
         if let Event::Text(_) = e {
             code_span = span;
@@ -91,7 +93,7 @@ fn add_python(content: &str) -> Result<String> {
             in_mermaid_block = false;
 
             let python_content = &content[code_span.clone()];
-            // let python_content = escape_html(python_content);
+            let python_content = escape_html(python_content);
             let python_code = format!("<py-repl>{}</py-repl>", python_content);
             mermaid_blocks.push((span, python_code));
         }
