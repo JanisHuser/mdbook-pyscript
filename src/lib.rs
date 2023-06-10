@@ -77,7 +77,6 @@ fn add_python(content: &str) -> Result<String> {
             continue;
         }
 
-        println!(e);
 
         // We're in the code block. The text is what we want.
         if let Event::Text(_) = e {
@@ -92,7 +91,8 @@ fn add_python(content: &str) -> Result<String> {
             );
             in_mermaid_block = false;
 
-            let python_content = &content[code_span.clone()];
+            let python_content = &content[code_span.clone()]
+            println!("{}", python_content);
             let python_content = escape_html(python_content);
             let python_code = format!("<py-repl>{}</py-repl>", python_content);
             mermaid_blocks.push((span, python_code));
