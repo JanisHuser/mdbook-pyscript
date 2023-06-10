@@ -90,7 +90,7 @@ fn add_python(content: &str) -> Result<String> {
 
             let python_content = &content[code_span.clone()];
             let python_content = escape_html(python_content);
-            let python_code = format!("<py-repl>{}</py-repl>\n\n", python_content);
+            let python_code = format!("<code><py-repl>{}</py-repl></code>\n\n", python_content);
             mermaid_blocks.push((span, python_code));
         }
     }
