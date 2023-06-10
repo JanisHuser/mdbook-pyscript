@@ -19,8 +19,8 @@ const MERMAID_FILES: &[(&str, &[u8])] = &[
     ("load-py-modules.js", LOAD_PY_MODULES_JS),
 ];
 
-pub fn make_app() -> Command<'static> {
-    Command::new("mdbook-python")
+pub fn make_app() -> Command {
+    Command::new("mdbook-pyscript")
         .version(crate_version!())
         .about("mdbook preprocessor to add mermaid support")
         .subcommand(
