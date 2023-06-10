@@ -41,6 +41,7 @@ fn escape_html(s: &str) -> String {
             '"' => output.push_str("&quot;"),
             '&' => output.push_str("&amp;"),
             '#' => output.push_str("&num;"),
+           '\n' => output.push_str("\r\n"),
             _ => output.push(c),
         }
     }
