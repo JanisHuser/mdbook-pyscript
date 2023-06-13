@@ -1,6 +1,6 @@
 # mdbook-mermaid
 
-A preprocessor for [mdbook][] to add [python in browser compilation][] support.
+A preprocessor for [mdbook][] to add [python][] support.
 
 [mdbook]: https://github.com/rust-lang-nursery/mdBook
 [pyscript]: [https://mermaidjs.github.io/](https://pyscript.net)
