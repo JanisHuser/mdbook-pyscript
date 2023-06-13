@@ -1,6 +1,6 @@
 # mdbook-mermaid
 
-A preprocessor for [mdbook][] to add [python][] support.
+A preprocessor for [mdbook][] to add python execution support.
 
 [mdbook]: https://github.com/rust-lang-nursery/mdBook
 [pyscript]: [https://mermaidjs.github.io/](https://pyscript.net)
