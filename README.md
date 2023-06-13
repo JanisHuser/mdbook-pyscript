@@ -1,4 +1,4 @@
-# mdbook-mermaid
+# mdbook-pyscript
 
 A preprocessor for [mdbook][] to add python execution support.
 
